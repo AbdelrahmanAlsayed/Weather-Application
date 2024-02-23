@@ -7,6 +7,7 @@
 - [Screenshot](#screenshot)
 - [Links](#links)
 - [Features](#features)
+- [Lighthouse Report](#Lighthouse-Report)
 - [Project Structure](#project-structure)
 - [API Integration](#api-integration)
 - [Installation](#installation)
@@ -26,24 +27,45 @@ This is a Weather Dashboard application designed to provide users with up-to-dat
 - ReactJs
 - RESTful API
 - Context API
-- vite 
-
+- Vite
+- ESLint and Prettier for code linting and formatting
+- Designed also by me
 
 ### Screenshot
 [Weather Dashborad](Screenshot.png)
 
 ### Links
-- Live Site URL: [Weather Dashborad]()
+- Live Site URL: [Weather Dashborad](https://weatheritoo.vercel.app/)
 
 
 ### Features
 - default city is Cairo, EG, providing weather information for this location.
-- Real-time weather data based on the user's current geographical location.
+- Real-time weather data based on the user's current geographical location if you click on Current Location button.
 - search for any city and instantly view its weather conditions.
-- Get Today's Highlights, including the Air Quality Index, Sunrise & Sunset times, Humidity, Pressure, Visibility, and "Feels Like" temperature.
+- Get Today's Highlights, including the Sunrise & Sunset times, Humidity, Pressure, Visibility, and "Feels Like" temperature.
 - Daily Weather Forecast, including updates every 3 hours and the corresponding Wind Speed.
 - Access a 5-day Weather Forecast.
 - Light and Dark Modes, represented by a sun or moon icon. Your chosen mode is saved using local storage.
+
+## Lighthouse Report Metrics
+
+- **Desktop Metrics:**
+  - Performance: Outstanding at 99%
+  - Accessibility: High score of 95%
+  - Best Practices: High score of 93%
+  - SEO: Perfect score of 100%
+
+- **Mobile Metrics:**
+  - Performance: Solid at around 90%
+  - Accessibility: High score of 94%
+  - Best Practices: High score of 93%
+  - SEO: Impressive score of 97%
+
+The Lighthouse report provides valuable metrics for both desktop and mobile, showcasing outstanding performance, accessibility, best practices, and SEO optimization.
+These metrics reflect a well-optimized and compliant website.
+
+
+
 
 ## Project Structure
 
@@ -53,6 +75,7 @@ This is a Weather Dashboard application designed to provide users with up-to-dat
     - `ComponentName.jsx` :  component
     - `ComponentName.module.css` : Stylesheet for the component using CSS modules
   - `context/` : Context providers for the Context API
+  - `Hooks/` : some custom hooks i needed
   - `App.jsx` : Main application component which is the `<Layout />`
   - `index.css` : Global stylesheet
   - `main.js` : Entry point of the application
@@ -65,7 +88,7 @@ This is a Weather Dashboard application designed to provide users with up-to-dat
 
 ## API Integration
 
-The Weather Dashboard uses OpenWeatherMap API for weather data.
+The Weather Dashboard uses OpenWeatherMap API for fetching weather data.
 
 ### Fetching Data
 
@@ -77,24 +100,27 @@ fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}
   .then(response => response.json())
   .then(data => displayWeather(data))
   .catch(error => console.error('Error:', error));
+
 ```
 
-- [Installation](#installation)
+## Installation
 
 To set up and run the Weather Dashboard locally with an API key, follow these steps:
 
 ```bash
-git clone [repository-url]
+git clone https://github.com/AbdelrahmanAlsayed/Weather-Application
 cd your-project-directory
 echo "REACT_APP_OPENWEATHERMAP_API_KEY=your-api-key-here" > .env
 npm install && npm run dev
 
 
-Replace `[repository-url]`, `your-project-directory`, and `your-api-key-here` with the actual repository URL, project directory, and your OpenWeatherMap API key, respectively.
+Replace your-project-directory with the actual name of your project directory, and replace your-api-key-here with your OpenWeatherMap API key.
 
 ```
 
-- [License](#license)
+
+
+## License
 
 This project is open-source and free for non-commercial use. You are allowed to view, modify, and distribute the code for non-commercial purposes. For commercial use or any other inquiries, please contact me.
 

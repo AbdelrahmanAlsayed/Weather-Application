@@ -22,7 +22,6 @@ body.dark {
     --transition: .3s;
 }
 
-
 * {
     margin: 0;
     padding: 0;
@@ -30,7 +29,6 @@ body.dark {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
 
 body {
     font-family: 'Exo 2', sans-serif; 

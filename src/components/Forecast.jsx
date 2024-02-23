@@ -31,6 +31,7 @@ function Forecast() {
                             alt="img"
                             title={item.forecastItem.weather[0].description}
                             className="weather-icon"
+                            loading="lazy"
                         />
                         <span>{parseInt(item.forecastItem.main.temp_max)}°c</span>
                         <p className={styles.label}>{item.formattedDate}</p>

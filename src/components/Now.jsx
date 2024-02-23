@@ -4,7 +4,6 @@ import { MdDateRange } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 
 
-
 function Now() {
     const { currentWeatherData } = useAppContext();
     return (
@@ -12,7 +11,7 @@ function Now() {
             <div className={styles.card}>
                 <h2 className={styles.title}>Now</h2>
                 <div className={styles.wrapper}>
-                    <span className={styles}>{Math.round(currentWeatherData?.main.temp)}°c</span>
+                    <span className={styles}>{Math.round(currentWeatherData?.main.temp) || ""}°c</span>
                     <img
                         src={`https://openweathermap.org/img/wn/${currentWeatherData?.weather[0].icon}@2x.png`}
                         alt="Weather icon"
@@ -28,7 +27,7 @@ function Now() {
                     </li>
                     <li className={styles.metaItem}>
                         <FaLocationDot />
-                        <p className={styles.metaText}>{`${currentWeatherData?.name}, ${currentWeatherData?.sys.country || ""}`}</p>
+                        <p className={styles.metaText}>{`${currentWeatherData?.name || ""}, ${currentWeatherData?.sys.country || ""}`}</p>
                     </li>
                 </ul>
             </div>

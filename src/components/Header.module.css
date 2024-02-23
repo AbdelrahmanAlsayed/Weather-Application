@@ -109,7 +109,8 @@
     gap: 10px;
 }
 
-.headerActions a {
+.headerActions .btn {
+    all: unset;
     text-decoration: none;
     background-color: #2196f3;
     color: var(--main-text-color);
@@ -118,16 +119,23 @@
     align-items: center;
     padding: 8px;
     border-radius: 20px;
+    cursor: pointer;
 }
 
-.headerActions a:hover {
+
+.headerActions .btn:hover {
     box-shadow:  0 0 8px #2196f3;
 }
 
-.headerActions a span {
+.headerActions .btn span {
     padding-left: 5px;
-    font-size: .9rem;
+    font-size: .8rem;
     text-align: center;
+}
+
+.headerActions .btn.clicked , .headerActions .btn:hover.clicked{
+    box-shadow: 0;
+    background-color: #e9e6e6;
 }
 
 .toggle, .openS, .closeS {

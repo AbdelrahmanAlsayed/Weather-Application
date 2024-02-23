@@ -48,9 +48,7 @@ const AppProvider = ({ children }) => {
 
 
     const value = {
-        latitude,
         setLatitude,
-        longitude,
         setLongitude,
         currentWeatherData,
         forecastData,

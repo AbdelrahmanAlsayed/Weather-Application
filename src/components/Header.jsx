@@ -1,32 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './Header.module.css';
 import logoImg from "../assets/logo.png";
 import { FaSearch } from "react-icons/fa";
 import { FaMoon, FaSun, FaArrowLeft, FaLocationCrosshairs } from "react-icons/fa6";
 import { useAppContext } from '../context/AppContext';
 import { FaLocationDot } from "react-icons/fa6";
+import UseCurrentLocation from '../Hooks/UseCurrentLocation';
+import UseToogleTheme from '../Hooks/UseToogleTheme';
 
 
 function Header() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const { getCurrentLocationWeather, isDisabled } = UseCurrentLocation();
+    const { isDarkMode, toggleMode } = UseToogleTheme();
     const { setQuery, searchResults, setSearchResults, setLatitude, setLongitude } = useAppContext();
-    const storedDarkMode = JSON.parse(localStorage.getItem('darkmode')) || false;
-    const [isDarkMode, setIsDarkMode] = useState(storedDarkMode);
-    const bodyElement = document.body;
+    const inputRef = useRef(); 
+    const listRef = useRef(); 
 
 
-    useEffect(() => {
-        if (isDarkMode) {
-            bodyElement.classList.add('dark');
-        } else {
-            bodyElement.classList.remove('dark');
-        }
-        localStorage.setItem('darkmode', JSON.stringify(isDarkMode));
-    }, [isDarkMode, bodyElement]);
-
-    const toggleMode = () => {
-        setIsDarkMode(!isDarkMode);
-    };
     const openSearch = () => {
         setIsSearchOpen(true);
     };
@@ -36,7 +27,17 @@ function Header() {
     const handleSearchInput = (event) => {
         const query = event.target.value.trim();
         setQuery(query);
+        console.log(query);
+        if (query === "") {
+            setSearchResults([]);
+        }
+        if (query.length > 0) {
+            inputRef.current.classList.add(styles.show);
+        } else {
+            inputRef.current.classList.remove(styles.show);
+        }
     };
+    
     const handleItemClick = (lat, lon) => () => {
         setLatitude(lat);
         setLongitude(lon);
@@ -44,33 +45,7 @@ function Header() {
         setSearchResults([]);
         setIsSearchOpen(false);
     };
-    const getCurrentLocationWeather = () => {
-        if (window.navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    };
-
-    const successCallback = (position) => {
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-
-        console.log('Current location coordinates:', latitude, longitude);
-
-        setLatitude(latitude);
-        setLongitude(longitude);
-        setSearchResults([]);
-    };
-
-    const errorCallback = (error) => {
-        console.log('Error getting current location:', error);
-    };
-
-    const options = {
-        enableHighAccuracy: true,
-    };
-
+    
 
     return (
         <header id="header" className={`${styles.header} container`}>
@@ -86,6 +61,7 @@ function Header() {
                     <input
                         type="search"
                         name="search"
+                        ref={inputRef}
                         className={styles.searchField}
                         placeholder="Search city..."
                         autoComplete="off"
@@ -96,7 +72,7 @@ function Header() {
                     </button>
                 </div>
                 <div className={styles.searchResult} data-search-result>
-                    <ul className={styles.viewList}>
+                    <ul className={styles.viewList} ref={listRef}>
                         {searchResults.map((country) => (
                             <div key={country.lon} className={styles.viewItem} onClick={handleItemClick(country.lat, country.lon)}>
                                 <FaLocationDot />
@@ -114,10 +90,10 @@ function Header() {
                     <button className={styles.openS} aria-label="open search" title="open search" onClick={openSearch}>
                         <FaSearch />
                     </button>
-                    <a href="#" title="current location weather" onClick={getCurrentLocationWeather}>
+                    <button name='location' disabled={isDisabled} className={styles.btn} id='locationBtn' title="current location weather" onClick={getCurrentLocationWeather}>
                         <FaLocationCrosshairs />
                         <span className={styles.locationBtn}>Current Location</span>
-                    </a>
+                    </button>
                 </div>
                 <button className={styles.toggle} aria-label="switch between light and dark mode" title="switch the theme" onClick={toggleMode}>
                     {isDarkMode ? <FaSun /> : <FaMoon />}

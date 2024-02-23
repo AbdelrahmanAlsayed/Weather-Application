@@ -9,15 +9,16 @@ import { useAppContext } from './../context/AppContext';
 
 function Highlights() {
     const { currentWeatherData } = useAppContext();
-
-function formatTime(timeUnix, timezone) {
-    const date = new Date((timeUnix + timezone) * 1000);
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-    const amPm = hours >= 12 ? "PM" : "AM";
-    return `${hours % 12 || 12}:${minutes} ${amPm}`;
-}
     
+
+    function formatTime(timeUnix, timezone) {
+        const date = new Date((timeUnix + timezone) * 1000);
+        const hours = date.getUTCHours();
+        const minutes = date.getUTCMinutes();
+        const amPm = hours >= 12 ? "PM" : "AM";
+        return `${hours % 12 || 12}:${minutes} ${amPm}`;
+    }
+
 
     return (
         <section className={styles.highlights} aria-label="highlights label">
