@@ -32,7 +32,8 @@ This is a Weather Dashboard application designed to provide users with up-to-dat
 - Designed also by me
 
 ### Screenshot
-[Weather Dashborad](Screenshot.png)
+![Weather Application](Screenshot.png)
+
 
 ### Links
 - Live Site URL: [Weather Dashborad](https://weatheritoo.vercel.app/)
@@ -47,7 +48,7 @@ This is a Weather Dashboard application designed to provide users with up-to-dat
 - Access a 5-day Weather Forecast.
 - Light and Dark Modes, represented by a sun or moon icon. Your chosen mode is saved using local storage.
 
-## Lighthouse Report Metrics
+### Lighthouse Report Metrics
 
 - **Desktop Metrics:**
   - Performance: Outstanding at 99%
@@ -114,7 +115,8 @@ echo "REACT_APP_OPENWEATHERMAP_API_KEY=your-api-key-here" > .env
 npm install && npm run dev
 
 
-Replace your-project-directory with the actual name of your project directory, and replace your-api-key-here with your OpenWeatherMap API key.
+Replace your-project-directory with the actual name of your project
+directory, and replace your-api-key-here with your OpenWeatherMap API key.
 
 ```
 
