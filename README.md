@@ -22,9 +22,8 @@ This is a Weather Dashboard application designed to provide users with up-to-dat
 
 ### Built with
 
-- Semantic HTML5
-- CSS Modules
 - ReactJs
+- CSS Modules
 - RESTful API
 - Context API
 - Vite
@@ -125,7 +124,6 @@ directory, and replace your-api-key-here with your OpenWeatherMap API key.
 ## License
 
 This project is open-source and free for non-commercial use. You are allowed to view, modify, and distribute the code for non-commercial purposes. For commercial use or any other inquiries, please contact me.
-
 No specific license file is provided. If you have questions about using this project, feel free to reach out to me at dev.abdelrahman7@gmail.com 
 
 
