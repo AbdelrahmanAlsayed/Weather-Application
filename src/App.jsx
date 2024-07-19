@@ -1,12 +1,12 @@
-import Layout from "./components/Layout"
-import AppProvider from "./context/AppContext"
+import Layout from "./components/layout/Layout";
+import AppProvider from "./context/AppContext";
 
 function App() {
-    return (
-        <AppProvider>
-            <Layout/>
-        </AppProvider>
-    )
+  return (
+    <AppProvider>
+      <Layout />
+    </AppProvider>
+  );
 }
 
 export default App;

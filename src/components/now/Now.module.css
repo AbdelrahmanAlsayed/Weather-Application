@@ -1,0 +1,55 @@
+.currentWeather .card {
+  background-color: var(--boxes-colors);
+  color: var(--sec-text-color);
+  border-radius: 30px;
+  padding: 30px;
+}
+
+.currentWeather .card h2 {
+  font-size: 22px;
+  color: var(--main-text-color);
+}
+
+.currentWeather .card .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.currentWeather .card .wrapper span {
+  font-size: 55px;
+  color: var(--main-text-color);
+}
+
+.currentWeather .card .wrapper img {
+  width: 90px;
+  margin: auto;
+}
+
+.currentWeather .card .wState {
+  text-transform: capitalize;
+  font-size: 0.9rem;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--sec-text-color);
+  color: var(--sec-text-color);
+}
+
+.currentWeather .card .metaList {
+  margin-top: 30px;
+}
+
+.currentWeather .card .metaList .metaItem {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.currentWeather .card .metaList .metaItem i {
+  color: var(--main-text-color);
+}
+
+.currentWeather .card .metaList .metaItem p {
+  font-size: 0.9rem;
+}

@@ -1,0 +1,237 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  gap: 10px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: var(--main-text-color);
+  gap: 10px;
+}
+
+.logo .image {
+  width: 4rem;
+}
+
+.logo .heading {
+  font-size: 1.5rem;
+}
+
+.searchView {
+  transition: var(--transition);
+}
+
+.searchWrapper {
+  position: relative;
+}
+
+.searchWrapper .icon {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.searchWrapper input {
+  display: block;
+  all: unset;
+  height: 50px;
+  width: 400px;
+  border-radius: 28px;
+  background-color: var(--search-color);
+  padding-left: 42px;
+  padding-right: 10px;
+  transition: var(--transition);
+}
+
+.searchWrapper input.show {
+  border-radius: 28px 28px 0 0;
+  border-bottom: 1px solid var(--sec-text-color);
+}
+
+.searchWrapper input:focus {
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+.searchResult {
+  position: relative;
+  z-index: 99;
+}
+
+.viewList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 360px;
+  overflow-y: auto;
+  border-radius: 0 0 28px 28px;
+}
+
+.viewItem {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 20px;
+  height: 65px;
+  background-color: var(--search-color);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+
+.viewItem:hover {
+  background-color: var(--input-hover);
+}
+
+.viewItem i,
+.viewItem .itemSubtitle {
+  color: var(--sec-text-color);
+}
+
+.viewItem .itemSubtitle {
+  margin-top: 2px;
+  font-size: 0.8rem;
+}
+
+.end,
+.headerActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerActions .btn {
+  all: unset;
+  text-decoration: none;
+  background-color: #2196f3;
+  color: var(--main-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.headerActions .btn:hover {
+  box-shadow: 0 0 8px #2196f3;
+}
+
+.headerActions .btn span {
+  padding-left: 5px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.headerActions .btn.clicked,
+.headerActions .btn:hover.clicked {
+  box-shadow: 0;
+  background-color: #e9e6e6;
+}
+
+.toggle,
+.openS,
+.closeS {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  all: unset;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background-color: var(--search-color);
+  border-radius: 50%;
+}
+
+.closeS,
+.openS {
+  display: none;
+}
+
+.toggle:hover,
+.closeS:hover,
+.openS:hover {
+  box-shadow: inset 0 0 4px var(--sec-text-color);
+}
+
+.searchView.open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--back-ground-color);
+  height: 100vh;
+  width: 100%;
+}
+
+.searchView.open .searchWrapper {
+  display: block;
+  border-bottom: 1px solid var(--sec-text-color);
+}
+
+.searchView.open .searchWrapper span {
+  display: none;
+}
+
+.searchView.open .searchWrapper input {
+  border-radius: 0;
+  width: 100%;
+  padding: 10px 10px 10px 60px;
+  box-shadow: none;
+}
+
+.searchView.open .searchWrapper .icon {
+  display: none;
+}
+
+.searchView.open .searchWrapper .closeS {
+  border: none;
+  display: block;
+  position: absolute;
+  top: 55%;
+  left: 20px;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.searchView.open .viewList {
+  border-radius: 0;
+}
+
+@media (max-width: 992px) {
+  .searchWrapper input {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo .heading,
+  .searchWrapper {
+    display: none;
+  }
+  .openS {
+    display: block;
+  }
+}
+
+@media (max-width: 392px) {
+  .headerActions a {
+    width: 40px;
+    height: 40px;
+  }
+  .headerActions a span {
+    display: none;
+  }
+}

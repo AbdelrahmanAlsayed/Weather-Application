@@ -1,72 +1,74 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 
 const AppContext = createContext();
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = "ac97b4a45bf9f7f94d8d960d16fc3a36";
 const DEFAULT_LATITUDE = 30.0626;
 const DEFAULT_LONGITUDE = 31.2497;
 
 async function fetchData(url, setter) {
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setter(data);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    setter(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 }
 
 const AppProvider = ({ children }) => {
-    const [latitude, setLatitude] = useState(DEFAULT_LATITUDE);
-    const [longitude, setLongitude] = useState(DEFAULT_LONGITUDE);
-    const [currentWeatherData, setCurrentWeatherData] = useState(null);
-    const [forecastData, setForecastData] = useState(null);
-    const [query, setQuery] = useState(null);
-    const [searchResults, setSearchResults] = useState([]);
+  const [latitude, setLatitude] = useState(DEFAULT_LATITUDE);
+  const [longitude, setLongitude] = useState(DEFAULT_LONGITUDE);
+  const [currentWeatherData, setCurrentWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState(null);
+  const [query, setQuery] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
+  const fetchWeatherData = useCallback(() => {
+    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`;
 
-    const apiUrls = {
-        currentWeather: `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`,
-        forecast: `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${API_KEY}`,
-        geo: `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`
-    };
+    fetchData(currentWeatherUrl, setCurrentWeatherData);
+    fetchData(forecastUrl, setForecastData);
+  }, [latitude, longitude]);
 
-    useEffect(() => {
-        const fetchDataAndUpdateState = async (url, setter) => {
-            await fetchData(url, setter);
-        };
+  const fetchGeoData = useCallback(() => {
+    if (query) {
+      const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`;
+      fetchData(geoUrl, setSearchResults);
+    }
+  }, [query]);
 
-        fetchDataAndUpdateState(apiUrls.currentWeather, setCurrentWeatherData);
-        fetchDataAndUpdateState(apiUrls.forecast, setForecastData);
+  useEffect(() => {
+    fetchWeatherData();
+  }, [fetchWeatherData]);
 
-        if (query) {
-            const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${API_KEY}`;
-            fetchDataAndUpdateState(geoUrl, setSearchResults);
-        }
+  useEffect(() => {
+    fetchGeoData();
+  }, [fetchGeoData]);
 
-    }, [apiUrls.currentWeather, apiUrls.forecast, query, latitude, longitude]);
+  const value = {
+    setLatitude,
+    setLongitude,
+    currentWeatherData,
+    forecastData,
+    setQuery,
+    searchResults,
+    setSearchResults,
+    query,
+  };
 
-
-    const value = {
-        setLatitude,
-        setLongitude,
-        currentWeatherData,
-        forecastData,
-        setQuery,
-        searchResults,
-        setSearchResults
-    };
-
-    return (
-        <AppContext.Provider value={value}>
-            {children}
-        </AppContext.Provider>
-    );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useAppContext() {
-    return useContext(AppContext);
+  return useContext(AppContext);
 }
 
 export default AppProvider;
